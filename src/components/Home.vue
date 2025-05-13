@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { RouterLink } from 'vue-router'
+import { cuisines } from '@/constants/cuisines'
 
 const query = ref('')
 const recipes = ref([])
@@ -11,6 +12,8 @@ const isLoading = ref(false)
 const recipesPerPage = 5
 let currentPage = ref(1)
 let totalPages = ref(1)
+
+const selectedCuisine = ref('')
 
 /**
  * This calls the API and fetches the recipes already considering the limit
@@ -28,6 +31,7 @@ const fetchRecipes = async (page = 1) => {
       params: {
         apiKey,
         query: query.value,
+        cuisine: selectedCuisine.value,
         number: recipesPerPage,
         offset: (page - 1) * recipesPerPage,
       },
@@ -66,6 +70,11 @@ const changePage = (page) => {
 <template>
   <h1>Welcome! Search for a recipe</h1>
   <div class="search-area">
+    <select v-model="selectedCuisine">
+      <option value="">All Cuisines</option>
+      <option v-for="cuisine in cuisines" :key="cuisine" :value="cuisine">{{ cuisine }}</option>
+    </select>
+    <p v-if="selectedCuisine">Filtering for: {{ selectedCuisine }}</p>
     <input
       v-model="query"
       type="text"
