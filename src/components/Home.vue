@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { RouterLink } from 'vue-router'
 
 const query = ref('')
 const recipes = ref([])
@@ -65,18 +66,24 @@ const changePage = (page) => {
 <template>
   <h1>Welcome! Search for a recipe</h1>
   <div class="search-area">
-    <input v-model="query" type="text" name="search" placeholder="Search recipe" />
+    <input
+      v-model="query"
+      type="text"
+      name="search"
+      placeholder="Search recipe"
+      @keyup.enter="searchRecipes"
+    />
     <button @click="searchRecipes" :disabled="isLoading">Search</button>
   </div>
 
-  <div v-if="loading" class="loading">Loading...</div>
+  <div v-if="isLoading" class="loading">Loading...</div>
   <div v-if="error" class="error">{{ error }}</div>
 
   <div v-if="recipes.length > 0" class="recipes">
-    <div v-for="recipe in recipes" :key="recipe.id">
+    <RouterLink :to="`/recipe/${recipe.id}`" v-for="recipe in recipes" :key="recipe.id">
       <img :src="recipe.image" alt="" />
       {{ recipe.title }}
-    </div>
+    </RouterLink>
 
     <div class="pagination">
       <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
@@ -86,7 +93,7 @@ const changePage = (page) => {
       </button>
     </div>
   </div>
-  <div v-else>
+  <div v-else-if="!isLoading">
     <span>No recipes found.</span>
   </div>
 </template>
