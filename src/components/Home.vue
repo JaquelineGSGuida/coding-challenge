@@ -139,7 +139,12 @@ const changePage = (page) => {
 
       <div v-if="recipes.length > 0" class="recipes">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-3">
-          <RouterLink :to="`/recipe/${recipe.id}`" v-for="recipe in recipes" :key="recipe.id">
+          <RouterLink
+            :to="`/recipe/${recipe.id}`"
+            class="text-decoration-none"
+            v-for="recipe in recipes"
+            :key="recipe.id"
+          >
             <div class="col mb-3 mb-sm-0 h-100">
               <div class="card h-100">
                 <img :src="recipe.image" class="card-img-top" :alt="recipe.title" />
