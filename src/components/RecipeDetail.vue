@@ -95,11 +95,13 @@ watch(
           <div
             class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center align-items-md-start px-3"
           >
-            <p>🍽️ {{ recipe.servings }} servings</p>
-            <p>⏱️ Ready in {{ recipe.readyInMinutes }} minutes</p>
-            <p>🔥 Cooked in {{ recipe.cookingMinutes }} minutes</p>
-            <p>🥣 Prepared in {{ recipe.preparationMinutes }} minutes</p>
-            <p>💰 ${{ recipe.pricePerServing }} per serving</p>
+            <p v-if="recipe.servings">🍽️ {{ recipe.servings }} servings</p>
+            <p v-if="recipe.readyInMinutes">⏱️ Ready in {{ recipe.readyInMinutes }} minutes</p>
+            <p v-if="recipe.cookingMinutes">🔥 Cooked in {{ recipe.cookingMinutes }} minutes</p>
+            <p v-if="recipe.preparationMinutes">
+              🥣 Prepared in {{ recipe.preparationMinutes }} minutes
+            </p>
+            <p v-if="recipe.pricePerServing">💰 ${{ recipe.pricePerServing }} per serving</p>
           </div>
         </div>
 
@@ -144,5 +146,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style></style>

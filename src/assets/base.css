@@ -47,3 +47,30 @@ body {
   font-size: 14px;
   margin-top: 10px;
 }
+
+.food-banner {
+  background-image: url('food-banner.jpg');
+  background-size: cover;
+  background-position: center 10%;
+  transform: scaleY(-1);
+  background-repeat: no-repeat;
+  border-radius: 5;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.quote-box {
+  max-width: 600px;
+  z-index: 1;
+  position: relative;
+  background-color: #eee8e8;
+  opacity: 0.9;
+  margin-top: 5rem;
+  backdrop-filter: blur(2px);
+  border-radius: 12px;
+}
+
+.site-author {
+  color: #777;
+  font-size: 0.9em;
+}

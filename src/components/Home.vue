@@ -184,11 +184,54 @@ const changePage = (page) => {
           </ul>
         </nav>
       </div>
-      <div v-else-if="!isLoading && hasSearched">
-        <span>No recipes found.</span>
+      <div
+        v-else-if="!isLoading && hasSearched"
+        class="d-flex justify-content-center align-items-center text-center"
+      >
+        <h4 class="font-cursive">
+          No recipes found... <br />
+          Maybe try searching for something else?
+        </h4>
+      </div>
+
+      <div
+        v-if="!hasSearched || (!isLoading && hasSearched && recipes.length === 0)"
+        class="position-relative text-center"
+        style="min-height: 60vh"
+      >
+        <div class="food-banner position-absolute top-0 start-0 w-100 h-100"></div>
+        <div
+          class="quote-box position-relative mx-auto p-4 rounded shadow bg-white"
+          style="max-width: 600px"
+        >
+          <blockquote class="blockquote mb-0">
+            <span class="pulse-icon" style="font-size: 4rem">🎵</span>
+            <span class="pulse-icon" style="font-size: 4rem">🧁</span>
+            <span class="pulse-icon" style="font-size: 4rem">🎶</span>
+            <p class="fst-italic text-muted fs-5 mt-3">
+              “Cooking is like painting or writing a song. Just as there are only so many notes or
+              colors, there are only so many flavors—it’s how you combine them that sets you apart.”
+            </p>
+            <footer class="blockquote-footer mt-2 text-muted">Wolfgang Puck</footer>
+          </blockquote>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<style></style>
+<style scoped>
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-icon {
+  animation: pulse 2.5s infinite ease-in-out;
+}
+</style>
